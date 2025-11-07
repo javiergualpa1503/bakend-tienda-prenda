@@ -7,8 +7,18 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 const app = express();
 
+const allowedOrigins = [
+    "http://localhost:5173", // local
+    "https://tu-frontend.vercel.app" // tu dominio real en producción
+];
+
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
 // Middlewares
-app.use(cors());
 app.use(express.json());
 
 // Conexión a DB
