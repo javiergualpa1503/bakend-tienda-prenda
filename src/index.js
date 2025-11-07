@@ -28,7 +28,7 @@ connectDB();
 app.use("/api/usuarios", userRoutes);
 
 // Ruta base
-app.get("/", (req, res) => res.send("API de usuarios funcionando ✅"));
+app.get("/", (req, res) => res.send("API de usuarios funcionando con exito✅"));
 
 // Puerto
 const PORT = process.env.PORT || 4000;
