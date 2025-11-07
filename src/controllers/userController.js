@@ -3,25 +3,25 @@ import User from "../models/User.js";
 
 export const registrarUsuario = async (req, res) => {
     try {
-        const { nombre, correo, contraseña } = req.body;
+        const { name, email, password } = req.body;
 
         // Validaciones básicas
-        if (!nombre || !correo || !contraseña) {
+        if (!name || !email || !password) {
             return res.status(400).json({ msg: "Todos los campos son obligatorios" });
         }
 
         // Verificar si el usuario ya existe
-        const existe = await User.findOne({ correo });
+        const existe = await User.findOne({ email });
         if (existe) {
             return res.status(400).json({ msg: "El correo ya está registrado" });
         }
 
         // Encriptar la contraseña
         const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(contraseña, salt);
+        const hash = bcrypt.hashSync(password, salt);
 
         // Crear usuario
-        const nuevoUsuario = new User({ nombre, correo, contraseña: hash });
+        const nuevoUsuario = new User({ name, email, password: hash });
         await nuevoUsuario.save();
 
         res.status(201).json({
