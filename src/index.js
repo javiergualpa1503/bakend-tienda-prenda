@@ -9,7 +9,7 @@ const app = express();
 
 const allowedOrigins = [
     "http://localhost:5173", // local
-    "https://tu-frontend.vercel.app" // tu dominio real en producción
+    "https://prendaclick.netlify.app/" // tu dominio real en producción
 ];
 
 app.use(cors({
